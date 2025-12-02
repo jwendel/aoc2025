@@ -40,15 +40,23 @@ func main() {
 		default:
 			log.Fatalln("bad data? ", d)
 		}
+		if p < 0 {
+			p += 100
+		}
+		if p > 99 {
+			p -= 100
+		}
+
 		for {
+			if p >= 0 && p <= 99 {
+				break
+			}
+			count++
 			if p < 0 {
 				p += 100
 			}
 			if p > 99 {
 				p -= 100
-			}
-			if p >= 0 && p <= 99 {
-				break
 			}
 		}
 		log.Println(d, "  ", p)
