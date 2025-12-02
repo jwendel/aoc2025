@@ -32,37 +32,28 @@ func main() {
 		if err != nil {
 			log.Fatalln("atoi fail: ", err)
 		}
-		switch d[0] {
-		case 'L':
-			p = p - num
-		case 'R':
-			p = p + num
-		default:
-			log.Fatalln("bad data? ", d)
-		}
-		if p < 0 {
-			p += 100
-		}
-		if p > 99 {
-			p -= 100
-		}
 
-		for {
-			if p >= 0 && p <= 99 {
-				break
+		for num > 0 {
+			switch d[0] {
+			case 'L':
+				p--
+			case 'R':
+				p++
+			default:
+				log.Fatalln("bad data? ", d)
 			}
-			count++
+			num--
 			if p < 0 {
 				p += 100
-			}
-			if p > 99 {
+			} else if p > 99 {
 				p -= 100
 			}
+			if p == 0 {
+				count++
+			}
 		}
-		log.Println(d, "  ", p)
-		if p == 0 {
-			count++
-		}
+
+		log.Println(count, "  ", d, "  ", p)
 	}
 	log.Println(count)
 
