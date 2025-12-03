@@ -49,8 +49,26 @@ func main() {
 
 		log.Println(lower, upper)
 
+		for i := lower; i <= upper; i++ {
+			result, found := checkForMatch(i)
+			log.Println(result, found)
+		}
+
 		if end {
 			break
 		}
 	}
+}
+
+func checkForMatch(value int) (result int, found bool) {
+	strValue := strconv.Itoa(value)
+	beforeLen := len(strValue)
+	for j := 2; j < beforeLen; j++ {
+		if beforeLen%j != 0 {
+			continue
+		}
+		pattern := strValue[:j]
+		log.Println(pattern)
+	}
+	return 0, false
 }
