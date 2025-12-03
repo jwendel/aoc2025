@@ -20,6 +20,7 @@ func main() {
 	reader := bufio.NewReader(file)
 
 	end := false
+	total := 0
 	for {
 
 		data, err := reader.ReadString(',')
@@ -47,11 +48,14 @@ func main() {
 			log.Fatalln("3problem parsing string: ", after)
 		}
 
-		log.Println(lower, upper)
+		log.Println("upper/lower: ", lower, upper)
 
 		for i := lower; i <= upper; i++ {
-			result, found := checkForMatch(i)
-			log.Println(result, found)
+			found := checkForMatch(i)
+			if found {
+				total += i
+				log.Printf("found match in range %d-%d. Value: %d. Current total: %d", lower, upper, i, total)
+			}
 		}
 
 		if end {
@@ -60,15 +64,24 @@ func main() {
 	}
 }
 
-func checkForMatch(value int) (result int, found bool) {
+func checkForMatch(value int) (found bool) {
 	strValue := strconv.Itoa(value)
 	beforeLen := len(strValue)
-	for j := 2; j < beforeLen; j++ {
+	maxVal := (beforeLen + 1) / 2
+
+outer:
+	for j := 1; j <= maxVal; j++ {
 		if beforeLen%j != 0 {
 			continue
 		}
 		pattern := strValue[:j]
-		log.Println(pattern)
+		for k := j; k < beforeLen; k += j {
+			toMatch := strValue[k : k+j]
+			if pattern != toMatch {
+				continue outer
+			}
+		}
+		return true
 	}
-	return 0, false
+	return false
 }
