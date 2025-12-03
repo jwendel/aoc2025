@@ -33,18 +33,18 @@ func main() {
 
 		before, after, found := strings.Cut(data, "-")
 		if !found {
-			log.Fatalln("problem parsing string: ", data)
+			log.Fatalln("1problem parsing string: ", data)
 		}
 
 		lower, err := strconv.Atoi(before)
 		if err != nil {
-			log.Fatalln("problem parsing string: ", before)
+			log.Fatalln("2problem parsing string: ", before)
 		}
 
 		after = strings.Trim(after, ",")
 		upper, err := strconv.Atoi(after)
 		if err != nil {
-			log.Fatalln("problem parsing string: ", after)
+			log.Fatalln("3problem parsing string: ", after)
 		}
 
 		log.Println(lower, upper)
