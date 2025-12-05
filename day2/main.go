@@ -12,7 +12,9 @@ import (
 
 func main() {
 
-	file, err := os.DirFS(".").Open("input.txt")
+	// 50857215695 is too high
+
+	file, err := os.DirFS(".").Open("sample_input.txt")
 	if err != nil {
 		log.Fatalln("problem reading file", err)
 	}
@@ -68,13 +70,10 @@ func main() {
 func checkForMatch(value int) (found bool) {
 	strValue := strconv.Itoa(value)
 	beforeLen := len(strValue)
-	if beforeLen%2 != 0 {
-		return false
-	}
 	maxVal := (beforeLen + 1) / 2
 
 outer:
-	for j := beforeLen / 2; j <= maxVal; j++ {
+	for j := 1; j <= maxVal; j++ {
 		if beforeLen%j != 0 {
 			continue
 		}
