@@ -14,7 +14,7 @@ func main() {
 
 	// 50857215695 is too high
 
-	file, err := os.DirFS(".").Open("sample_input.txt")
+	file, err := os.DirFS(".").Open("input.txt")
 	if err != nil {
 		log.Fatalln("problem reading file", err)
 	}
@@ -50,7 +50,7 @@ func main() {
 			log.Fatalln("3problem parsing string: ", after)
 		}
 
-		log.Println("upper/lower: ", lower, upper)
+		//log.Println("upper/lower: ", lower, upper)
 
 		for i := lower; i <= upper; i++ {
 			found := checkForMatch(i)
@@ -70,6 +70,9 @@ func main() {
 func checkForMatch(value int) (found bool) {
 	strValue := strconv.Itoa(value)
 	beforeLen := len(strValue)
+	if beforeLen == 1 {
+		return false
+	}
 	maxVal := (beforeLen + 1) / 2
 
 outer:
