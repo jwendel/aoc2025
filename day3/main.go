@@ -55,17 +55,6 @@ func main() {
 			numbers[11-offset] = maxVal
 		}
 
-		//maxVal2 := data[pos+1] - '0'
-		//pos2 := pos + 1
-		//for i := pos2; i < len(data); i++ {
-		//	val := data[i] - '0'
-		//	if val > maxVal2 {
-		//		pos2 = i
-		//		maxVal2 = val
-		//	}
-		//}
-
-		//res := (maxVal * 10) + (maxVal2)
 		total += result
 		log.Println("numbers: ", numbers, "result: ", result, "total: ", total)
 
