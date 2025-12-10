@@ -5,6 +5,7 @@ import (
 	"errors"
 	"io"
 	"log"
+	"math"
 	"os"
 )
 
@@ -34,31 +35,41 @@ func main() {
 		data = data[:len(data)-1]
 		log.Println("line: :", data)
 
-		maxVal := data[0] - '0'
-		pos := 0
+		var numbers [12]uint8
+		// 171741365185404 is too low
 
-		for i := 1; i < (len(data) - 1); i++ {
-			val := data[i] - '0'
-			if val > maxVal {
-				pos = i
-				maxVal = val
+		result := 0
+		lastPos := 0
+		for offset := 11; offset >= 0; offset-- {
+			maxVal := data[lastPos] - '0'
+
+			for i := lastPos + 1; i < (len(data) - offset); i++ {
+				val := data[i] - '0'
+				if val > maxVal {
+					lastPos = i
+					maxVal = val
+				}
 			}
+			lastPos++
+			result += int(maxVal) * int(math.Pow10(offset))
+			numbers[11-offset] = maxVal
 		}
 
-		maxVal2 := data[pos+1] - '0'
-		pos2 := pos + 1
-		for i := pos2; i < len(data); i++ {
-			val := data[i] - '0'
-			if val > maxVal2 {
-				pos2 = i
-				maxVal2 = val
-			}
-		}
+		//maxVal2 := data[pos+1] - '0'
+		//pos2 := pos + 1
+		//for i := pos2; i < len(data); i++ {
+		//	val := data[i] - '0'
+		//	if val > maxVal2 {
+		//		pos2 = i
+		//		maxVal2 = val
+		//	}
+		//}
 
-		res := (maxVal * 10) + (maxVal2)
-		log.Println("max:", maxVal, "pos: ", pos, "max2", maxVal2, "pos2: ", pos2, "res: ", res)
+		//res := (maxVal * 10) + (maxVal2)
+		total += result
+		log.Println("numbers: ", numbers, "result: ", result, "total: ", total)
 
-		total += int(res)
+		//total += int(res)
 
 		if end {
 			break
