@@ -37,9 +37,20 @@ func main() {
 		pos++
 	}
 
+	fmt.Println()
+	fmt.Println()
 	for i := 0; i < rows; i++ {
-		fmt.Println(array[i])
+		for j := 0; j < lineLength; j++ {
+			if array[i][j] {
+				fmt.Print("@")
+			} else {
+				fmt.Print(".")
+			}
+		}
+		fmt.Println()
 	}
+	fmt.Println()
+	fmt.Println()
 
 	total := 0
 	for i := 0; i < rows; i++ {
@@ -64,22 +75,22 @@ func getCount(array [][]bool, row int, col int, rows int, cols int) int {
 	if row > 0 && array[row-1][col] {
 		count++
 	}
-	if row < rows-1 && col > 0 && array[row+1][col-1] {
-		count++
-	}
-	if row < rows-1 && array[row+1][col] {
-		count++
-	}
-	if row < rows-1 && col < cols-1 && array[row+1][col+1] {
+	if row > 0 && col < cols-1 && array[row-1][col+1] {
 		count++
 	}
 	if col < cols-1 && array[row][col+1] {
 		count++
 	}
-	if row > 0 && col < cols-1 && array[row-1][col+1] {
+	if row < rows-1 && col < cols-1 && array[row+1][col+1] {
 		count++
 	}
-	if row > 0 && array[row-1][col] {
+	if row < rows-1 && array[row+1][col] {
+		count++
+	}
+	if row < rows-1 && col > 0 && array[row+1][col-1] {
+		count++
+	}
+	if col > 0 && array[row][col-1] {
 		count++
 	}
 
