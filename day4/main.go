@@ -53,18 +53,33 @@ func main() {
 	fmt.Println()
 
 	total := 0
-	for i := 0; i < rows; i++ {
-		for j := 0; j < lineLength; j++ {
-			if array[i][j] && getCount(array, i, j, rows, lineLength) < 4 {
-				total++
-				fmt.Print("x")
-			} else {
-				fmt.Print(".")
-			}
+
+	for {
+		arrayNew := make([][]bool, rows)
+		for i := 0; i < rows; i++ {
+			arrayNew[i] = make([]bool, lineLength)
 		}
-		fmt.Println()
+
+		totalBefore := total
+		for i := 0; i < rows; i++ {
+			for j := 0; j < lineLength; j++ {
+				if array[i][j] && getCount(array, i, j, rows, lineLength) < 4 {
+					total++
+					fmt.Print("x")
+				} else if array[i][j] {
+					arrayNew[i][j] = true
+				} else {
+					fmt.Print(".")
+				}
+			}
+			fmt.Println()
+		}
+		array = arrayNew
+		fmt.Println("total: ", total)
+		if total == totalBefore {
+			break
+		}
 	}
-	fmt.Println("total: ", total)
 }
 
 func getCount(array [][]bool, row int, col int, rows int, cols int) int {
