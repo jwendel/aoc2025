@@ -67,6 +67,7 @@ func main() {
 					total++
 					fmt.Print("x")
 				} else if array[i][j] {
+					fmt.Print("@")
 					arrayNew[i][j] = true
 				} else {
 					fmt.Print(".")
